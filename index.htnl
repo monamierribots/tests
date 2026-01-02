@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISION | Преобразование идей</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        :root {
+            --primary: #000000;
+            --secondary: #111111;
+            --accent: #00D4AA;
+            --text: #FFFFFF;
+            --text-secondary: #AAAAAA;
+            --border: #333333;
+        }
+        
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Навигация */
+        header {
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(90deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .logo-dot {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--text);
+        }
+        
+        /* Герой секция */
+        .hero {
+            padding: 100px 0 150px;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .hero-tag {
+            display: inline-block;
+            background-color: rgba(0, 212, 170, 0.1);
+            color: var(--accent);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 212, 170, 0.3);
+        }
+        
+        h1 {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, #fff 60%, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
+        }
+        
+        /* Поле ввода идеи */
+        .idea-input-container {
+            background-color: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 5px;
+            display: flex;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s;
+        }
+        
+        .idea-input-container:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.2);
+        }
+        
+        .idea-input {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 18px;
+            padding: 25px 20px;
+            outline: none;
+        }
+        
+        .idea-input::placeholder {
+            color: var(--text-secondary);
+        }
+        
+        .input-icon {
+            padding: 0 25px;
+            display: flex;
+            align-items: center;
+            color: var(--accent);
+            font-size: 20px;
+        }
+        
+        /* Кнопка */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 22px 50px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: #000;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #00b894;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 212, 170, 0.3);
+        }
+        
+        .btn-disabled {
+            background-color: var(--secondary);
+            color: var(--text-secondary);
+            cursor: not-allowed;
+            width: 100%;
+            border: 1px solid var(--border);
+        }
+        
+        .btn-icon {
+            font-size: 20px;
+        }
+        
+        /* Футер */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            margin-top: 100px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .social-link {
+            color: var(--text-secondary);
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        
+        .social-link:hover {
+            color: var(--accent);
+        }
+        
+        /* Анимации */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 42px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .idea-input {
+                padding: 20px 15px;
+                font-size: 16px;
+            }
+            
+            .btn {
+                padding: 18px 30px;
+                font-size: 16px;
+            }
+        }
+        
+        /* Эффекты */
+        .gradient-circle {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 212, 170, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            top: 10%;
+            left: 10%;
+            z-index: -1;
+        }
+        
+        .gradient-circle-2 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+            bottom: 10%;
+            right: 10%;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">VISION<span class="logo-dot">.</span></div>
+                <div class="nav-links">
+                    <a href="#" class="nav-link">Решения</a>
+                    <a href="#" class="nav-link">Клиенты</a>
+                    <a href="#" class="nav-link">О нас</a>
+                    <a href="#" class="nav-link">Контакты</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="gradient-circle"></div>
+        <div class="gradient-circle-2"></div>
+        
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-tag">
+                        <i class="fas fa-bolt"></i> ТРЕНД 2025 — ИНСТРУМЕНТЫ ДЛЯ БИЗНЕСА
+                    </div>
+                    
+                    <h1>Преобразуйте вашу идею в бизнес-план за 24 часа</h1>
+                    
+                    <p class="hero-subtitle">
+                        Система искусственного интеллекта, которая анализирует вашу идею и создает готовый бизнес-план с финансовыми прогнозами, анализом рынка и стратегией внедрения.
+                    </p>
+                    
+                    <div class="idea-input-container">
+                        <div class="input-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <input type="text" class="idea-input" placeholder="Опишите вашу бизнес-идею в одном предложении...">
+                        <div class="input-icon">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary">
+                        <i class="fas fa-rocket btn-icon"></i> 
+                        Сгенерировать бизнес-план
+                    </button>
+                    
+                    <button class="btn btn-disabled" disabled>
+                        <i class="fas fa-lock btn-icon"></i> 
+                        Расширенный анализ для бизнеса (скоро)
+                    </button>
+                    
+                    <p class="pulse" style="color: var(--text-secondary); margin-top: 30px; font-size: 14px;">
+                        <i class="fas fa-shield-alt"></i> Все данные защищены и конфиденциальны
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">
+                    © 2023 VISION. Все права защищены.
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Простая анимация при фокусе на поле ввода
+        const ideaInput = document.querySelector('.idea-input');
+        const inputContainer = document.querySelector('.idea-input-container');
+        
+        ideaInput.addEventListener('focus', function() {
+            inputContainer.style.transform = 'scale(1.02)';
+        });
+        
+        ideaInput.addEventListener('blur', function() {
+            inputContainer.style.transform = 'scale(1)';
+        });
+        
+        // Анимация кнопки генерации
+        const generateBtn = document.querySelector('.btn-primary');
+        
+        generateBtn.addEventListener('click', function() {
+            if (ideaInput.value.trim() === '') {
+                ideaInput.placeholder = "Пожалуйста, введите вашу идею...";
+                inputContainer.style.borderColor = '#ff4757';
+                
+                setTimeout(() => {
+                    inputContainer.style.borderColor = '#333333';
+                    ideaInput.placeholder = "Опишите вашу бизнес-идею в одном предложении...";
+                }, 2000);
+            } else {
+                generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin btn-icon"></i> Анализируем идею...';
+                generateBtn.style.opacity = '0.8';
+                
+                setTimeout(() => {
+                    generateBtn.innerHTML = '<i class="fas fa-check btn-icon"></i> Бизнес-план готов!';
+                    generateBtn.style.backgroundColor = '#2ed573';
+                    
+                    setTimeout(() => {
+                        generateBtn.innerHTML = '<i class="fas fa-rocket btn-icon"></i> Сгенерировать бизнес-план';
+                        generateBtn.style.backgroundColor = '';
+                        generateBtn.style.opacity = '1';
+                    }, 3000);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
